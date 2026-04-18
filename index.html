@@ -3,242 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BinGo | The Future of Property Logistics</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>BinGo | Property Logistics & Valet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bingo-green: #2d8a39;
             --bingo-blue: #2e5da7;
-            --bg-glass: rgba(255, 255, 255, 0.9);
             --text-dark: #111827;
-            --text-gray: #6b7280;
-            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --text-light: #6b7280;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #fcfcfc; color: var(--text-dark); overflow-x: hidden; }
+        body { background-color: #ffffff; color: var(--text-dark); }
 
-        /* Login Layer */
-        #login-page {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top right, #e8f5e9, #ffffff);
-            z-index: 3000; display: flex; align-items: center; justify-content: center;
-        }
-        .login-card { width: 90%; max-width: 400px; background: #fff; padding: 40px; border-radius: 32px; box-shadow: var(--card-shadow); text-align: center; }
-        .input-field { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid #e5e7eb; margin-top: 8px; margin-bottom: 20px; font-size: 1rem; transition: 0.3s; }
-        .input-field:focus { border-color: var(--bingo-green); outline: none; box-shadow: 0 0 0 4px rgba(45, 138, 57, 0.1); }
-        .btn-main { width: 100%; padding: 18px; border-radius: 16px; background: var(--bingo-green); color: #fff; border: none; font-weight: 800; cursor: pointer; font-size: 1rem; }
-
-        /* App Shell */
-        #app-shell { display: none; }
+        /* HEADER & BRANDING */
         header { 
             padding: 20px; display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; background: var(--bg-glass); backdrop-filter: blur(10px); z-index: 100;
+            position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid #f3f4f6;
         }
-        .notification-bell { 
-            position: relative; cursor: pointer; font-size: 1.5rem; background: #f3f4f6; 
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px;
-        }
-        .notif-badge { position: absolute; top: 10px; right: 10px; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; border: 2px solid #fff; }
+        .logo { font-size: 1.5rem; font-weight: 800; cursor: pointer; text-decoration: none; }
+        .logo span.blue { color: var(--bingo-blue); }
+        .logo span.green { color: var(--bingo-green); }
 
-        /* UI Sections */
-        .page { display: none; padding: 24px; animation: slideUp 0.4s ease-out; max-width: 600px; margin: 0 auto; }
-        .page.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* VIEW CONTAINERS */
+        .view-container { display: none; padding: 20px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.4s ease; }
+        .view-container.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Feature Cards */
-        .glass-card { background: #fff; border: 1px solid #f3f4f6; border-radius: 28px; padding: 24px; margin-bottom: 20px; box-shadow: var(--card-shadow); }
-        
-        /* Map Simulation */
-        .map-box { 
-            height: 350px; background: #e5e7eb; border-radius: 24px; position: relative; overflow: hidden; 
-            background-image: url('https://www.google.com/maps/d/u/0/thumbnail?mid=1Zp_O6Z6Z6Z6Z6Z6Z6Z6Z6Z6Z6'); /* Placeholder */
-            background-size: cover;
-        }
-        .driver-marker { position: absolute; top: 40%; left: 50%; font-size: 2rem; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-        
-        /* Bottom Bar */
-        .tab-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 85px;
-            background: #fff; border-top: 1px solid #f3f4f6; display: flex; 
-            justify-content: space-around; align-items: center; padding-bottom: 20px; z-index: 1000;
-        }
-        .tab-item { text-align: center; color: var(--text-gray); font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .tab-item.active { color: var(--bingo-green); }
-        .tab-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+        /* 1. LANDING PAGE (What people see first) */
+        #landing-view { text-align: center; padding-top: 80px; }
+        .hero-tag { background: #e8f5e9; color: var(--bingo-green); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+        h1.hero-title { font-size: 3rem; margin: 20px 0; line-height: 1.1; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
 
-        /* Notifications Modal */
-        #notif-modal {
-            display: none; position: fixed; top: 80px; right: 20px; width: 300px; 
-            background: #fff; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
-            padding: 20px; z-index: 2000; border: 1px solid #eee;
+        /* 2. LOGIN MODAL */
+        #login-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000;
         }
+        .login-card { background: #fff; padding: 40px; border-radius: 30px; width: 90%; max-width: 400px; text-align: center; }
 
-        .edit-input { background: #f9fafb; border: 1px solid #eee; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 10px; }
+        /* 3. BUTTONS */
+        .btn { padding: 16px 32px; border-radius: 14px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; font-size: 1rem; text-decoration: none; display: inline-block; }
+        .btn-green { background: var(--bingo-green); color: white; }
+        .btn-outline { border: 2px solid #eee; background: transparent; }
+
+        /* 4. CARDS & PORTAL ELEMENTS */
+        .card { background: #f9fafb; border-radius: 24px; padding: 24px; margin-bottom: 20px; border: 1px solid #f1f5f9; }
+        .status-pill { background: #fff; color: var(--bingo-green); padding: 6px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 800; border: 1px solid #eee; }
+
+        /* BOTTOM NAV BAR */
+        #bottom-nav { 
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 85px; 
+            background: #fff; border-top: 1px solid #eee; display: none;
+            justify-content: space-around; align-items: center; padding-bottom: 20px; z-index: 1500;
+        }
+        .nav-item { text-align: center; font-size: 0.7rem; color: var(--text-light); cursor: pointer; }
+        .nav-item.active { color: var(--bingo-green); font-weight: 700; }
+
+        /* NOTIFICATION DOT */
+        .notif-btn { position: relative; width: 40px; height: 40px; background: #f3f4f6; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; }
+
+        /* FORM EDITING */
+        input.edit { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin: 10px 0; }
     </style>
 </head>
-<body>
+<body onload="checkFirstView()">
 
-    <div id="login-page">
-        <div class="login-card">
-            <h1 style="font-size: 2.5rem; margin-bottom: 5px;"><span style="color:var(--bingo-blue)">Bin</span><span style="color:var(--bingo-green)">Go</span></h1>
-            <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 0.9rem;">The Future of Property Logistics</p>
-            <input type="email" id="email" class="input-field" placeholder="Email Address">
-            <input type="password" id="password" class="input-field" placeholder="Password">
-            <button class="btn-main" onclick="initApp()">Sign In</button>
+    <header>
+        <a href="javascript:location.reload()" class="logo"><span class="blue">Bin</span><span class="green">Go</span></a>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <div id="notif-bell" class="notif-btn" style="display:none;" onclick="alert('Notification: Driver is 2 stops away!')">🔔<div class="dot"></div></div>
+            <button id="auth-btn" class="btn-green" style="padding: 10px 20px; font-size: 0.8rem; border-radius: 10px;" onclick="toggleLogin(true)">Sign In</button>
         </div>
-    </div>
+    </header>
 
-    <div id="app-shell">
-        <header>
-            <div style="font-weight: 900; font-size: 1.5rem;"><span style="color:var(--bingo-blue)">Bin</span><span style="color:var(--bingo-green)">Go</span></div>
-            <div class="notification-bell" onclick="toggleNotifs()">
-                🔔 <div class="notif-badge"></div>
+    <main id="landing-view" class="view-container">
+        <span class="hero-tag">#1 PROPERTY LOGISTICS IN GTA</span>
+        <h1 class="hero-title">Bin management,<br>perfectly automated.</h1>
+        <p style="color: var(--text-light); max-width: 500px; margin: 0 auto;">Never miss a pickup again. Join the hundreds of homeowners using the world's first smart bin valet system.</p>
+        <div class="btn-group">
+            <button class="btn btn-green" onclick="toggleLogin(true)">Get Started</button>
+            <button class="btn btn-outline">Our Pricing</button>
+        </div>
+        <div style="margin-top: 50px; opacity: 0.5;">🚚 Fully Managed Service • 📱 Live Tracking • 🧹 Sanitization</div>
+    </main>
+
+    <main id="client-dashboard" class="view-container">
+        <h1 id="client-name-display" style="font-size: 2rem;">Hi, Sarah 👋</h1>
+        <p style="color: var(--text-light); margin-bottom: 25px;">Your valet visit is confirmed.</p>
+        
+        <div class="card" style="background: linear-gradient(135deg, #2d8a39, #1b5e20); color: white; border: none;">
+            <span class="status-pill">COUNTDOWN</span>
+            <div style="font-size: 2.5rem; font-weight: 800; margin: 15px 0;">15h : 42m : 08s</div>
+            <p style="font-size: 0.8rem; opacity: 0.8;">📍 Scheduled: Tomorrow, 8:00 AM</p>
+        </div>
+
+        <h3>Recent Logistics</h3>
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span>✅ Bin sanitized</span> <small>Tuesday</small>
             </div>
-        </header>
+            <div style="display: flex; justify-content: space-between;">
+                <span>✅ Weekly move</span> <small>Monday</small>
+            </div>
+        </div>
+    </main>
 
-        <div id="notif-modal">
-            <h4 style="margin-bottom: 15px;">Notifications</h4>
-            <div style="font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid #eee;">🚚 Driver is 3 stops away!</div>
-            <div style="font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid #eee;">✅ Job completed at 8:12 AM</div>
-            <div style="font-size: 0.8rem; padding: 10px 0;">📅 Schedule updated for June</div>
+    <main id="driver-portal" class="view-container">
+        <h1>Driver Manifest</h1>
+        <p style="color:var(--text-light); margin-bottom: 25px;">Logged in as: Unit 01-Scarborough</p>
+        
+        <div class="card" style="border-left: 5px solid var(--bingo-green); background: #fff;">
+            <p style="font-size: 0.7rem; font-weight: 800; color: var(--bingo-green);">CURRENT STOP</p>
+            <h2 style="margin: 5px 0;">123 Maple St.</h2>
+            <p style="font-size: 0.8rem; color: var(--text-light);">Standard Tier • Move + Salt</p>
+            <button class="btn btn-green" style="width: 100%; margin-top: 15px;">📷 SCAN QR TO FINISH</button>
         </div>
 
-        <section id="client-home" class="page">
-            <h1 id="greeting" style="font-size: 2rem; margin-bottom: 8px;">Hi, Sarah 👋</h1>
-            <p style="color:var(--text-gray); margin-bottom: 25px;">Your bins are scheduled for pickup.</p>
+        <h3>Remaining Route (12)</h3>
+        <div class="card" style="padding: 15px; font-size: 0.9rem;">455 Oak Lane • 0.8km away</div>
+        <div class="card" style="padding: 15px; font-size: 0.9rem;">88 Birch Ave • 1.2km away</div>
+    </main>
+
+    <main id="admin-panel" class="view-container">
+        <h1>Command Center</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+            <div class="card" style="margin-bottom:0; background: var(--bingo-blue); color: white;">
+                <h2 style="font-size: 2rem;">142</h2><p style="font-size: 0.7rem;">CLIENTS</p>
+            </div>
+            <div class="card" style="margin-bottom:0; background: var(--bingo-green); color: white;">
+                <h2 style="font-size: 2rem;">$3.4k</h2><p style="font-size: 0.7rem;">REVENUE</p>
+            </div>
+        </div>
+        <h3>Fleet Activity</h3>
+        <div class="card">🚚 Unit 01: On Route <span style="float:right; color:var(--bingo-green)">● LIVE</span></div>
+    </main>
+
+    <main id="map-view" class="view-container">
+        <h1>Live Tracker</h1>
+        <div class="card" style="background: #e0f2fe; color: #0369a1; border: none;">
+            <strong>🚚 Driver is 2 stops away!</strong><br>
+            <small>Estimated Arrival: 18 minutes</small>
+        </div>
+        <div style="height: 350px; background: #eee; border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 4rem;">📍</div>
+    </main>
+
+    <main id="profile-view" class="view-container">
+        <h1>Account Settings</h1>
+        <div class="card">
+            <label style="font-size: 0.7rem; font-weight: 800;">FULL NAME</label>
+            <input type="text" id="p-name" class="edit" value="Sarah Johnson">
             
-            <div class="glass-card" style="background: linear-gradient(135deg, #2d8a39, #1b5e20); color: #fff;">
-                <p style="font-size: 0.8rem; font-weight: 600; opacity: 0.9;">COUNTDOWN TO SERVICE</p>
-                <div style="display: flex; gap: 20px; margin: 15px 0;">
-                    <div><span style="font-size: 2rem; font-weight: 800;">15</span><br><small>HRS</small></div>
-                    <div><span style="font-size: 2rem; font-weight: 800;">42</span><br><small>MINS</small></div>
-                </div>
-                <p style="font-size: 0.8rem;">Status: Driver Assigned</p>
-            </div>
+            <label style="font-size: 0.7rem; font-weight: 800;">SERVICE ADDRESS</label>
+            <input type="text" id="p-addr" class="edit" value="123 Maple St, Scarborough">
+            
+            <button class="btn btn-green" style="width: 100%; margin-top: 10px;" onclick="alert('Saved!')">Update Profile</button>
+            <button class="btn btn-outline" style="width: 100%; margin-top: 10px; color: #ef4444;" onclick="logout()">Sign Out</button>
+        </div>
+    </main>
 
-            <div class="glass-card">
-                <h3 style="font-size: 1rem; margin-bottom: 15px;">Today's Valet</h3>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="font-size: 0.9rem;">📍 Scarborough District</div>
-                    <div style="color: var(--bingo-green); font-weight: 800;">ON TIME</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="driver-home" class="page">
-            <h1>Route Manager</h1>
-            <div class="glass-card" style="margin-top: 20px;">
-                <p style="color: var(--text-gray); font-size: 0.8rem;">CURRENT STOP</p>
-                <h2 style="margin: 5px 0;">123 Maple St.</h2>
-                <button class="btn-main" style="margin-top: 15px;">SCAN BIN QR</button>
-            </div>
-            <h3>Next Up</h3>
-            <div class="glass-card" style="padding: 15px;">455 Oak Lane - 0.8km away</div>
-        </section>
-
-        <section id="admin-home" class="page">
-            <h1>Operations Dashboard</h1>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
-                <div class="glass-card" style="margin-bottom:0;"><h3>142</h3><p>Clients</p></div>
-                <div class="glass-card" style="margin-bottom:0;"><h3>98%</h3><p>Success</p></div>
-            </div>
-            <h3 style="margin-top: 20px;">Fleet Activity</h3>
-            <div class="glass-card">Unit 01: On Route (Scarborough)</div>
-        </section>
-
-        <section id="map-view" class="page">
-            <h1>Live Tracker</h1>
-            <div class="glass-card" style="background: #eff6ff; border-color: #dbeafe; padding: 15px;">
-                <p style="font-weight: 700; color: #1e40af;">🚚 Your Driver is 3 stops away!</p>
-                <p style="font-size: 0.8rem; color: #60a5fa;">Estimated Arrival: 14 Mins</p>
-            </div>
-            <div class="map-box">
-                <div class="driver-marker">🚚</div>
-                <div style="position: absolute; bottom: 20px; left: 20px; background: white; padding: 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 800;">ZONE 4 - ACTIVE</div>
-            </div>
-        </section>
-
-        <section id="profile-view" class="page">
-            <h1>Account Settings</h1>
-            <div class="glass-card" style="margin-top: 20px;">
-                <label style="font-size: 0.7rem; font-weight: 800; color: var(--text-gray);">FULL NAME</label>
-                <input type="text" id="prof-name" class="edit-input" value="Sarah Johnson">
-                
-                <label style="font-size: 0.7rem; font-weight: 800; color: var(--text-gray);">ADDRESS</label>
-                <input type="text" id="prof-addr" class="edit-input" value="123 Maple St, Scarborough, ON">
-                
-                <label style="font-size: 0.7rem; font-weight: 800; color: var(--text-gray);">EMAIL</label>
-                <input type="email" id="prof-email" class="edit-input" value="client@bingo.com">
-
-                <button class="btn-main" onclick="alert('Profile Updated Successfully!')" style="margin-top: 10px;">SAVE CHANGES</button>
-                <button class="btn-main" onclick="location.reload()" style="margin-top: 10px; background: #fee2e2; color: #ef4444;">SIGN OUT</button>
-            </div>
-        </section>
-
-        <div class="tab-bar">
-            <div class="tab-item active" onclick="showPage('home')"><span class="tab-icon">🏠</span>Home</div>
-            <div class="tab-item" onclick="showPage('schedule')"><span class="tab-icon">📅</span>Schedule</div>
-            <div class="tab-item" onclick="showPage('map-view')"><span class="tab-icon">📍</span>Map</div>
-            <div class="tab-item" onclick="showPage('profile-view')"><span class="tab-icon">👤</span>Profile</div>
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2 style="margin-bottom: 10px;">Portal Login</h2>
+            <p style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 25px;">Enter your credentials to access your dashboard.</p>
+            <input type="email" id="login-email" class="edit" placeholder="Email (e.g., client@bingo.com)">
+            <input type="password" id="login-pass" class="edit" placeholder="Password (1234)">
+            <button class="btn btn-green" style="width: 100%; margin-top: 15px;" onclick="processLogin()">Login</button>
+            <button class="btn" style="color: var(--text-light); margin-top: 10px;" onclick="toggleLogin(false)">Cancel</button>
         </div>
     </div>
+
+    <nav id="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home')">🏠<br>Home</div>
+        <div class="nav-item" onclick="switchTab('map-view')">📍<br>Map</div>
+        <div class="nav-item" onclick="switchTab('profile-view')">👤<br>Profile</div>
+    </nav>
 
     <script>
-        let userRole = '';
+        let currentRole = null;
 
-        function initApp() {
-            const email = document.getElementById('email').value.toLowerCase();
-            const pass = document.getElementById('password').value;
+        function checkFirstView() {
+            // Default show landing page
+            document.getElementById('landing-view').classList.add('active');
+        }
 
-            if (email === 'client@bingo.com' && pass === '1234') {
-                userRole = 'client';
-                document.getElementById('greeting').innerText = "Hi, Sarah 👋";
-            } else if (email === 'driver@bingo.com' && pass === '1234') {
-                userRole = 'driver';
-                document.getElementById('prof-name').value = "Logistics Unit 01";
-                document.getElementById('prof-addr').value = "GTA Fleet Hub";
-            } else if (email === 'admin@bingo.com' && pass === '1234') {
-                userRole = 'admin';
-                document.getElementById('prof-name').value = "System Administrator";
+        function toggleLogin(show) {
+            document.getElementById('login-overlay').style.display = show ? 'flex' : 'none';
+        }
+
+        function processLogin() {
+            const email = document.getElementById('login-email').value.toLowerCase();
+            const pass = document.getElementById('login-pass').value;
+
+            if (pass !== '1234') { alert("Wrong password! Try 1234"); return; }
+
+            if (email.includes('client')) {
+                currentRole = 'client';
+                document.getElementById('client-name-display').innerText = "Hi, Sarah 👋";
+            } else if (email.includes('driver')) {
+                currentRole = 'driver';
+            } else if (email.includes('admin')) {
+                currentRole = 'admin';
             } else {
-                alert("Invalid Credentials");
+                alert("Please use client@bingo.com, driver@bingo.com, or admin@bingo.com");
                 return;
             }
 
-            document.getElementById('login-page').style.display = 'none';
-            document.getElementById('app-shell').style.display = 'block';
-            showPage('home');
+            // Hide everything
+            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+            document.getElementById('landing-view').style.display = 'none';
+            document.getElementById('auth-btn').style.display = 'none';
+            document.getElementById('login-overlay').style.display = 'none';
+            
+            // Show Portal
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.getElementById('notif-bell').style.display = 'flex';
+            switchTab('home');
         }
 
-        function showPage(id) {
-            // Handle Home redirection
-            let target = id;
-            if (id === 'home') target = userRole + '-home';
+        function switchTab(tabId) {
+            let target = tabId;
+            if (tabId === 'home') {
+                target = (currentRole === 'client') ? 'client-dashboard' : 
+                         (currentRole === 'driver') ? 'driver-portal' : 'admin-panel';
+            }
 
-            // Special visibility for Admin/Driver specific sections
-            document.getElementById('client-home').style.display = 'none';
-            document.getElementById('driver-home').style.display = 'none';
-            document.getElementById('admin-home').style.display = 'none';
-
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
             document.getElementById(target).classList.add('active');
 
-            // Update Tabs
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            if (id === 'home') document.querySelectorAll('.tab-item')[0].classList.add('active');
-            if (id === 'schedule') document.querySelectorAll('.tab-item')[1].classList.add('active');
-            if (id === 'map-view') document.querySelectorAll('.tab-item')[2].classList.add('active');
-            if (id === 'profile-view') document.querySelectorAll('.tab-item')[3].classList.add('active');
+            // Nav Styling
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (tabId === 'home') document.querySelectorAll('.nav-item')[0].classList.add('active');
+            if (tabId === 'map-view') document.querySelectorAll('.nav-item')[1].classList.add('active');
+            if (tabId === 'profile-view') document.querySelectorAll('.nav-item')[2].classList.add('active');
         }
 
-        function toggleNotifs() {
-            const modal = document.getElementById('notif-modal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-        }
+        function logout() { location.reload(); }
     </script>
 </body>
 </html>
